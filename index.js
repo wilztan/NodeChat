@@ -41,6 +41,6 @@ io.on('connection', function(socket){
 });
 
 var IP = '10.63.89.232';
-server.listen(port,IP,()=>{
+server.listen(port,()=>{
   console.log("Listening on port :"+port);
 });
