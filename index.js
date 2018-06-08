@@ -5,7 +5,8 @@ const socketIO = require('socket.io');
 
 
 // port
-const port = 4001;
+// const port = 4001;
+const port = 80;
 
 //Server Instance
 const server = http.createServer(app);
