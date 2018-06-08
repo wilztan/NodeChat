@@ -6,8 +6,8 @@ const socketIO = require('socket.io');
 
 // port
 // const port = 4001;
-const port = 3000;
-// const port = process.env.PORT || 3000;;
+// const port = 3000;
+const port = process.env.PORT || 3000;
 
 //Server Instance
 const server = http.createServer(app);
