@@ -59,9 +59,18 @@ function getWeather(city) {
   var Weahterresult="";
   countryCode = "CN";
   var url = "http://api.openweathermap.org/data/2.5/weather?q="+city+","+countryCode+"&appid=50817e1815a7186ed5800037c259576f";
-  fetch(url)
-  .then(response => response.json())
-  .then(result => watherresult = result)
-  .catch(e => alert(e));
+  http.get(url, function(res){
+      var body = '';
+
+      res.on('data', function(chunk){
+          body += chunk;
+      });
+
+      res.on('end', function(){
+          Weahterresult = JSON.parse(body);
+      });
+  }).on('error', function(e){
+        console.log("Got an error: ", e);
+  });
   return Weahterresult;
 }
