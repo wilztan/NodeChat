@@ -57,10 +57,11 @@ function getWeather(city) {
   .then(response => {
     var weather = response.data;
     console.log(JSON.stringify(weather));
+    var content = "Hi Everyone, Today's Weather will be "+response.data.weather[0].description+", Humidity of "+response.data.main.humidity+", with temperature of "+((response.data.main.temp)/10)toFixed(1)+" C";
     var newMessage ={
       user:'LORD ADMIN',
       date: dt.getHours()+":"+dt.getMinutes(),
-      message:"Hi Everyone, Today's Weather will be "+response.data.weather[0].description+", Humidity of "+response.data.main.humidity+", with temperature of "+((response.data.main.temp)/10)toFixed(1)+" C"
+      message:content,
     }
     io.emit('message',newMessage);
   })
