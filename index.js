@@ -62,7 +62,6 @@ function getWeather(city) {
       date: dt.getHours()+":"+dt.getMinutes(),
       message:"Hi Everyone, Today's Weather will be "+weather.weather[0].description+", Humidity of "+weather.main.humidity+", with temperature of "+((weather.main.temp)/10)toFixed(1)+" C"
     }
-    console.log("here again");
     io.emit('message',newMessage);
   })
   .catch(error => {
