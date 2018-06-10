@@ -37,3 +37,15 @@ io.on('connection', function(socket){
 server.listen(port,()=>{
   console.log("Listening on port :"+port);
 });
+
+function determineNeeds(msg) {
+  var message = msg.message;
+  var dt = new Date();
+  if(message.includes("weather?")){
+    var newMessage ={
+      user:'LORD ADMIN',
+      date: dt.getHours()+":"+dt.getMinutes(),
+      message:"Hi Everyone, Today's Weather is XXX, Humidity of H, with temperature of T"
+    }
+  }
+}
