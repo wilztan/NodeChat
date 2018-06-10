@@ -6,8 +6,8 @@ const axios = require('axios');
 
 
 // port
-const port = 4001
-// const port = process.env.PORT || 3000;
+// const port = 4001
+const port = process.env.PORT || 4001;
 
 //Server Instance
 const server = http.createServer(app);
