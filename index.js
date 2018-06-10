@@ -31,6 +31,7 @@ io.on('connection', function(socket){
     io.emit('message', msg);
     console.log('message: ' + msg);
     console.log(JSON.stringify(msg));
+    determineNeeds(msg);
   });
 });
 
