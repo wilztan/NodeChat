@@ -50,6 +50,6 @@ function determineReply(msg) {
       message:"Hi Everyone, Today's Weather is XXX, Humidity of H, with temperature of T"
     }
     console.log("here again");
-    io.emit('message',msg);
+    io.emit('message',newMessage);
   }
 }
