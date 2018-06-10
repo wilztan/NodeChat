@@ -44,12 +44,24 @@ function determineReply(msg) {
   var dt = new Date();
   console.log("here");
   if(message.includes("weather?")){
+    var weather = getWeather("Beijing");
     var newMessage ={
       user:'LORD ADMIN',
       date: dt.getHours()+":"+dt.getMinutes(),
-      message:"Hi Everyone, Today's Weather is XXX, Humidity of H, with temperature of T"
+      message:"Hi Everyone, Today's Weather will be "+weather.weather.description+", Humidity of "+weather.main.Humidity+", with temperature of "+(weather.main.temp)/10+""
     }
     console.log("here again");
     io.emit('message',newMessage);
   }
+}
+
+function getWeather(city) {
+  var Weahterresult="";
+  countryCode = "CN";
+  var url = "http://api.openweathermap.org/data/2.5/weather?q="+city+","+countryCode+"&appid=50817e1815a7186ed5800037c259576f";
+  fetch(url)
+  .then(response => response.json())
+  .then(result => watherresult = result)
+  .catch(e => alert(e));
+  return Weahterresult;
 }
