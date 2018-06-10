@@ -2,10 +2,12 @@ const express = require('express');
 const app = express();
 const http = require('http');
 const socketIO = require('socket.io');
+const axios = require('axios');
 
 
 // port
-const port = process.env.PORT || 3000;
+const port = 4001
+// const port = process.env.PORT || 3000;
 
 //Server Instance
 const server = http.createServer(app);
@@ -41,36 +43,29 @@ server.listen(port,()=>{
 
 function determineReply(msg) {
   var message = msg.message;
-  var dt = new Date();
   console.log("here");
   if(message.includes("weather?")){
-    var weather = getWeather("Beijing");
-    var newMessage ={
-      user:'LORD ADMIN',
-      date: dt.getHours()+":"+dt.getMinutes(),
-      message:"Hi Everyone, Today's Weather will be "+weather.weather.description+", Humidity of "+weather.main.Humidity+", with temperature of "+(weather.main.temp)/10+""
-    }
-    console.log("here again");
-    io.emit('message',newMessage);
+    getWeather("Beijing");
   }
 }
 
 function getWeather(city) {
-  var Weahterresult="";
   countryCode = "CN";
+  var dt = new Date();
   var url = "http://api.openweathermap.org/data/2.5/weather?q="+city+","+countryCode+"&appid=50817e1815a7186ed5800037c259576f";
-  http.get(url, function(res){
-      var body = '';
-
-      res.on('data', function(chunk){
-          body += chunk;
-      });
-
-      res.on('end', function(){
-          Weahterresult = JSON.parse(body);
-      });
-  }).on('error', function(e){
-        console.log("Got an error: ", e);
+  axios.get(url)
+  .then(response => {
+    var weather = response.data;
+    console.log(JSON.stringify(weather));
+    var newMessage ={
+      user:'LORD ADMIN',
+      date: dt.getHours()+":"+dt.getMinutes(),
+      message:"Hi Everyone, Today's Weather will be "+weather.weather[0].description+", Humidity of "+weather.main.humidity+", with temperature of "+((weather.main.temp)/10)toFixed(1)+" C"
+    }
+    console.log("here again");
+    io.emit('message',newMessage);
+  })
+  .catch(error => {
+    console.log(error);
   });
-  return Weahterresult;
 }
