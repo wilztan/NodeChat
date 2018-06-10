@@ -60,7 +60,7 @@ function getWeather(city) {
     var newMessage ={
       user:'LORD ADMIN',
       date: dt.getHours()+":"+dt.getMinutes(),
-      message:"Hi Everyone, Today's Weather will be "+weather.weather[0].description+", Humidity of "+weather.main.humidity+", with temperature of "+((weather.main.temp)/10)toFixed(1)+" C"
+      message:"Hi Everyone, Today's Weather will be "+response.data.weather[0].description+", Humidity of "+response.data.main.humidity+", with temperature of "+((response.data.main.temp)/10)toFixed(1)+" C"
     }
     io.emit('message',newMessage);
   })
