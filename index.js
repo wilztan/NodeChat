@@ -47,5 +47,6 @@ function determineNeeds(msg) {
       date: dt.getHours()+":"+dt.getMinutes(),
       message:"Hi Everyone, Today's Weather is XXX, Humidity of H, with temperature of T"
     }
+    io.emit('message',msg);
   }
 }
