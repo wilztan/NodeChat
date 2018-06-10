@@ -31,7 +31,7 @@ io.on('connection', function(socket){
     io.emit('message', msg);
     console.log('message: ' + msg);
     console.log(JSON.stringify(msg));
-    determineNeeds(msg);
+    determineReply(msg);
   });
 });
 
@@ -39,15 +39,17 @@ server.listen(port,()=>{
   console.log("Listening on port :"+port);
 });
 
-function determineNeeds(msg) {
+function determineReply(msg) {
   var message = msg.message;
   var dt = new Date();
+  console.log("here");
   if(message.includes("weather?")){
     var newMessage ={
       user:'LORD ADMIN',
       date: dt.getHours()+":"+dt.getMinutes(),
       message:"Hi Everyone, Today's Weather is XXX, Humidity of H, with temperature of T"
     }
+    console.log("here again");
     io.emit('message',msg);
   }
 }
