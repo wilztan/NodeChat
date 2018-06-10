@@ -5,8 +5,6 @@ const socketIO = require('socket.io');
 
 
 // port
-// const port = 4001;
-// const port = 3000;
 const port = process.env.PORT || 3000;
 
 //Server Instance
@@ -27,22 +25,15 @@ io.on('connection',socket=>{
 });
 
 
-//Console MESSAGE
+// Emit Message
 io.on('connection', function(socket){
   socket.on('message', function(msg){
+    io.emit('message', msg);
     console.log('message: ' + msg);
     console.log(JSON.stringify(msg));
   });
 });
 
-//GET MESSAGE
-io.on('connection', function(socket){
-  socket.on('message', function(msg){
-    io.emit('message', msg);
-  });
-});
-
-var IP = '10.63.89.232';
 server.listen(port,()=>{
   console.log("Listening on port :"+port);
 });
